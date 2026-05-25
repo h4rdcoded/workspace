@@ -1,0 +1,75 @@
+{
+  "name": "admin",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "https://workspace.ipshopy.com",
+  "dependencies": {
+    "@ckeditor/ckeditor5-alignment": "^40.2.0",
+    "@ckeditor/ckeditor5-build-classic": "^40.0.0",
+    "@ckeditor/ckeditor5-indent": "^40.2.0",
+    "@ckeditor/ckeditor5-react": "^6.1.0",
+    "@react-three/drei": "^9.115.0",
+    "@react-three/fiber": "^8.17.12",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "apexcharts": "^3.44.2",
+    "axios": "^1.6.2",
+    "clipboard-copy": "^4.0.1",
+    "copy-text-to-clipboard": "^3.2.0",
+    "date-fns": "^2.30.0",
+    "dom": "^0.0.3",
+    "file-saver": "^2.0.5",
+    "flatpickr": "^4.6.13",
+    "framer-motion": "^12.38.0",
+    "js-cookie": "^3.0.5",
+    "jsonwebtoken": "^9.0.2",
+    "jwt-decode": "^4.0.0",
+    "react": "^18.2.0",
+    "react-apexcharts": "^1.4.1",
+    "react-bootstrap": "^2.10.10",
+    "react-dom": "^18.2.0",
+    "react-dropzone": "^14.2.3",
+    "react-flatpickr": "^4.0.11",
+    "react-i18next": "^13.5.0",
+    "react-icons": "^5.5.0",
+    "react-modal": "^3.16.1",
+    "react-router-dom": "^6.16.0",
+    "react-scripts": "5.0.1",
+    "react-select": "^5.8.0",
+    "react-snowfall": "^2.4.0",
+    "react-sweetalert2": "^0.6.0",
+    "react-table": "^7.8.0",
+    "react-toastify": "^10.0.4",
+    "react-window": "^2.1.0",
+    "recharts": "^3.2.1",
+    "router": "^1.3.8",
+    "three": "^0.181.1",
+    "web-vitals": "^2.1.4",
+    "xlsx": "^0.18.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

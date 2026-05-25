@@ -1,0 +1,1521 @@
+/*
+Template Name: Velzon - Admin & Dashboard Template
+Author: Themesbrand
+Website: https://themesbrand.com/
+Contact: support@themesbrand.com
+File: Custom Css File
+*/
+
+/* ===========================================
+   SIDEBAR LAYOUT FIXES
+   =========================================== */
+
+/* Fix layout direction - Convert RTL to LTR */
+[data-layout="vertical"] {
+    --vz-vertical-menu-width: 260px;
+}
+
+/* CSS Variables for proper theming */
+:root {
+    --vz-vertical-menu-bg: #ffffff;
+    --vz-vertical-menu-border: #e9ecef;
+    --vz-vertical-menu-item-color: #6d7080;
+    --vz-vertical-menu-item-bg: rgba(104, 124, 254, 0.15);
+    --vz-vertical-menu-item-hover-color: #687cfe;
+    --vz-vertical-menu-item-active-color: #687cfe;
+    --vz-vertical-menu-item-active-bg: rgba(104, 124, 254, 0.15);
+    --vz-vertical-menu-sub-item-color: #7c7f90;
+    --vz-vertical-menu-sub-item-hover-color: #687cfe;
+    --vz-vertical-menu-sub-item-active-color: #687cfe;
+    --vz-vertical-menu-title-color: #919da9;
+    --sidebar-collapsed-width: 70px;
+}
+
+/* Ensure body has proper positioning context */
+body {
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow-x: hidden !important;
+}
+
+[data-sidebar="dark"] {
+    --vz-vertical-menu-bg: #2a3266;
+    --vz-vertical-menu-border: #3a4266;
+    --vz-vertical-menu-item-color: #abb9e8;
+    --vz-vertical-menu-item-bg: rgba(255, 255, 255, 0.15);
+    --vz-vertical-menu-item-hover-color: #ffffff;
+    --vz-vertical-menu-item-active-color: #ffffff;
+    --vz-vertical-menu-item-active-bg: rgba(255, 255, 255, 0.15);
+    --vz-vertical-menu-sub-item-color: #abb9e8;
+    --vz-vertical-menu-sub-item-hover-color: #ffffff;
+    --vz-vertical-menu-sub-item-active-color: #ffffff;
+    --vz-vertical-menu-title-color: #838fb9;
+}
+
+/* Override RTL layout with LTR positioning */
+.app-menu.navbar-menu {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: auto !important;
+    width: var(--vz-vertical-menu-width) !important;
+    height: 100vh !important;
+    z-index: 1002 !important;
+    background: var(--vz-vertical-menu-bg) !important;
+    border-right: 1px solid var(--vz-vertical-menu-border) !important;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s ease !important;
+    transform: translateX(0) !important;
+    overflow: hidden !important;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Sidebar collapsed state - show icons only */
+.app-menu.navbar-menu.sidebar-hidden {
+    width: var(--sidebar-collapsed-width) !important;
+    transform: translateX(0) !important;
+    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* When sidebar is collapsed, hide text and show only icons */
+.app-menu.navbar-menu.sidebar-hidden .navbar-nav .nav-link span,
+.app-menu.navbar-menu.sidebar-hidden .menu-title,
+.app-menu.navbar-menu.sidebar-hidden .navbar-nav .nav-link[data-bs-toggle="collapse"]:after {
+    opacity: 0 !important;
+    transform: translateX(-10px) !important;
+    transition: opacity 0.3s ease, transform 0.3s ease !important;
+    pointer-events: none !important;
+}
+
+/* Show text when sidebar is expanded */
+.app-menu.navbar-menu:not(.sidebar-hidden) .navbar-nav .nav-link span,
+.app-menu.navbar-menu:not(.sidebar-hidden) .menu-title,
+.app-menu.navbar-menu:not(.sidebar-hidden) .navbar-nav .nav-link[data-bs-toggle="collapse"]:after {
+    opacity: 1 !important;
+    
+    transition: opacity 0.3s ease, transform 0.3s ease !important;
+}
+
+/* Adjust icon positioning when collapsed */
+.app-menu.navbar-menu.sidebar-hidden .navbar-nav .nav-link {
+    justify-content: center !important;
+    padding: 12px 0 !important;
+    transition: all 0.3s ease !important;
+}
+
+.app-menu.navbar-menu.sidebar-hidden .navbar-nav .nav-link i {
+    margin-right: 0 !important;
+    font-size: 20px !important;
+    transition: all 0.3s ease !important;
+}
+
+/* Smooth icon transitions */
+.app-menu.navbar-menu .navbar-nav .nav-link i {
+    transition: all 0.3s ease !important;
+}
+
+/* Hide dropdown menus when collapsed - but show on hover */
+.app-menu.navbar-menu.sidebar-hidden .menu-dropdown {
+    display: block !important;
+    position: absolute !important;
+    left: 100% !important;
+    top: 0 !important;
+    background: #ffffff !important;
+    border: 1px solid #e9ecef !important;
+    border-radius: 8px !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
+    min-width: 200px !important;
+    z-index: 9998 !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: translateX(-10px) !important;
+    transition: all 0.3s ease !important;
+    margin-left: 10px !important;
+    padding: 8px 0 !important;
+}
+
+/* Dark mode nested menu */
+[data-bs-theme="dark"] .app-menu.navbar-menu.sidebar-hidden .menu-dropdown {
+    background: #1a1a1a !important;
+    border-color: #333 !important;
+    color: #ffffff !important;
+}
+
+/* Show nested menu on hover */
+.app-menu.navbar-menu.sidebar-hidden .navbar-nav .nav-item:hover .menu-dropdown {
+    opacity: 1 !important;
+    visibility: visible !important;
+    /* transform: translateX(0) !important; */
+}
+
+/* Adjust logo when collapsed */
+.app-menu.navbar-menu.sidebar-hidden .navbar-brand-box {
+    /* padding: 15px 0 !important; */
+    text-align: center !important;
+}
+
+/* When sidebar is collapsed, hide large logo and show small logo */
+.app-menu.navbar-menu.sidebar-hidden .navbar-brand-box .logo .logo-lg,
+.app-menu.navbar-menu.sidebar-hidden .navbar-brand-box .logo-lg,
+.app-menu.navbar-menu.sidebar-hidden .navbar-brand-box a.logo span.logo-lg {
+    display: none !important;
+}
+
+.app-menu.navbar-menu.sidebar-hidden .navbar-brand-box .logo .logo-sm,
+.app-menu.navbar-menu.sidebar-hidden .navbar-brand-box .logo-sm,
+.app-menu.navbar-menu.sidebar-hidden .navbar-brand-box a.logo span.logo-sm {
+    display: block !important;
+}
+
+/* When sidebar is expanded, show large logo and hide small logo */
+.app-menu.navbar-menu:not(.sidebar-hidden) .navbar-brand-box .logo .logo-lg,
+.app-menu.navbar-menu:not(.sidebar-hidden) .navbar-brand-box .logo-lg,
+.app-menu.navbar-menu:not(.sidebar-hidden) .navbar-brand-box a.logo span.logo-lg {
+    display: block !important;
+}
+
+.app-menu.navbar-menu:not(.sidebar-hidden) .navbar-brand-box .logo .logo-sm,
+.app-menu.navbar-menu:not(.sidebar-hidden) .navbar-brand-box .logo-sm,
+.app-menu.navbar-menu:not(.sidebar-hidden) .navbar-brand-box a.logo span.logo-sm {
+    display: none !important;
+}
+
+/* Mobile sidebar positioning - handled in main mobile styles section below */
+
+/* Main content positioning fixes */
+.main-content {
+    margin-left: var(--vz-vertical-menu-width) !important;
+    margin-right: 0 !important;
+    transition: margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                width 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    width: calc(100% - var(--vz-vertical-menu-width)) !important;
+    min-height: 100vh !important;
+    position: relative !important;
+}
+
+/* When sidebar is collapsed (icons only), adjust main content */
+.main-content.sidebar-collapsed,
+body.sidebar-collapsed .main-content {
+    margin-left: var(--sidebar-collapsed-width) !important;
+    width: calc(100% - var(--sidebar-collapsed-width)) !important;
+}
+
+/* Alternative selector for main content when sidebar is collapsed */
+.app-menu.navbar-menu.sidebar-hidden ~ * .main-content,
+body:has(.app-menu.navbar-menu.sidebar-hidden) .main-content {
+    margin-left: var(--sidebar-collapsed-width) !important;
+    width: calc(100% - var(--sidebar-collapsed-width)) !important;
+}
+
+/* When sidebar is completely hidden on mobile */
+@media (max-width: 767.98px) {
+    .main-content {
+        margin-left: 0 !important;
+        width: 100% !important;
+    }
+    
+    .main-content.sidebar-collapsed,
+    .app-menu.navbar-menu.sidebar-hidden ~ * .main-content,
+    body:has(.app-menu.navbar-menu.sidebar-hidden) .main-content,
+    body.sidebar-collapsed .main-content {
+        margin-left: 0 !important;
+        width: 100% !important;
+    }
+}
+
+/* ===========================================
+   HEADER POSITIONING FIXES
+   =========================================== */
+
+/* Header positioning - use CSS custom properties for reliable positioning */
+:root {
+    --sidebar-width: var(--vz-vertical-menu-width);
+    --header-margin-left: var(--vz-vertical-menu-width);
+    --header-width: calc(100% - var(--vz-vertical-menu-width));
+}
+
+/* Default header positioning */
+#page-topbar {
+    position: fixed !important;
+    top: 0 !important;
+    left: var(--vz-vertical-menu-width) !important;
+    right: 0 !important;
+    width: calc(100% - var(--vz-vertical-menu-width)) !important;
+    z-index: 1001 !important;
+    transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                width 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    background: #fff !important;
+    border-bottom: 1px solid #e9ecef !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+}
+
+/* When sidebar is collapsed, adjust header positioning */
+.app-menu.navbar-menu.sidebar-hidden {
+    --header-margin-left: var(--sidebar-collapsed-width);
+    --header-width: calc(100% - var(--sidebar-collapsed-width));
+}
+
+/* Force header positioning update when sidebar is collapsed */
+.app-menu.navbar-menu.sidebar-hidden ~ * #page-topbar,
+body:has(.app-menu.navbar-menu.sidebar-hidden) #page-topbar {
+    left: var(--sidebar-collapsed-width) !important;
+    width: calc(100% - var(--sidebar-collapsed-width)) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* Alternative approach using JavaScript-friendly class */
+.sidebar-collapsed #page-topbar,
+body.sidebar-collapsed #page-topbar {
+    left: var(--sidebar-collapsed-width) !important;
+    width: calc(100% - var(--sidebar-collapsed-width)) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* Mobile responsive header positioning */
+@media (max-width: 767.98px) {
+    #page-topbar {
+        left: 0 !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+    }
+    
+    .app-menu.navbar-menu.sidebar-hidden ~ * #page-topbar,
+    body:has(.app-menu.navbar-menu.sidebar-hidden) #page-topbar,
+    .sidebar-collapsed #page-topbar,
+    body.sidebar-collapsed #page-topbar {
+        left: 0 !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+    }
+}
+
+/* ===========================================
+   ADDITIONAL HEADER RESPONSIVENESS FIXES
+   =========================================== */
+
+/* Ensure header extends fully to sidebar edge */
+#page-topbar {
+    border-left: none !important;
+    border-right: none !important;
+    outline: none !important;
+    /* Remove any potential gap between sidebar and header */
+    margin: 0 !important;
+    /* Ensure header starts exactly where sidebar ends */
+    left: var(--vz-vertical-menu-width) !important;
+    width: calc(100% - var(--vz-vertical-menu-width)) !important;
+}
+
+/* Ensure header content is properly aligned */
+#page-topbar .navbar-header {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    min-height: 70px !important;
+}
+
+/* Header content container adjustments */
+#page-topbar .layout-width {
+    width: 100% !important;
+    max-width: none !important;
+    padding: 0 15px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    height: 100% !important;
+}
+
+/* Ensure proper spacing for header elements */
+#page-topbar .d-flex {
+    /* width: 100% !important; */
+    justify-content: space-between !important;
+    align-items: center !important;
+    height: 100% !important;
+}
+
+/* Hamburger button positioning */
+#page-topbar .topnav-hamburger {
+    margin-right: 15px !important;
+    flex-shrink: 0 !important;
+}
+
+/* Search bar responsive adjustments */
+#page-topbar .app-search {
+    flex: 1 !important;
+    max-width: 400px !important;
+    margin: 0 15px !important;
+    position: relative !important;
+}
+/* 
+Header right side elements
+#page-topbar .d-flex.align-items-center:last-child {
+    flex-shrink: 0 !important;
+    gap: 8px !important;
+} */
+
+/* Ensure smooth transitions for all header elements */
+#page-topbar * {
+    transition: all 0.3s ease-in-out !important;
+}
+
+/* ===========================================
+   FINAL HEADER POSITIONING ENHANCEMENTS
+   =========================================== */
+
+/* Force header positioning with higher specificity */
+body #page-topbar {
+    position: fixed !important;
+    top: 0 !important;
+    z-index: 1001 !important;
+    /* Ensure no gaps or margins */
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* When sidebar is open (default state) */
+body:not(.sidebar-collapsed) #page-topbar {
+    left: var(--vz-vertical-menu-width) !important;
+    width: calc(100% - var(--vz-vertical-menu-width)) !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+/* When sidebar is collapsed */
+body.sidebar-collapsed #page-topbar {
+    left: 70px !important;
+    width: calc(100% - 70px) !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+/* Mobile overrides */
+@media (max-width: 767.98px) {
+    body #page-topbar,
+    body:not(.sidebar-collapsed) #page-topbar,
+    body.sidebar-collapsed #page-topbar {
+        left: 0 !important;
+        width: 100% !important;
+    }
+}
+
+/* Ensure header doesn't interfere with sidebar */
+#page-topbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+    background: #fff !important;
+    border-bottom: 1px solid #e9ecef !important;
+    /* Final positioning to eliminate any gaps */
+    left: var(--vz-vertical-menu-width) !important;
+    width: calc(100% - var(--vz-vertical-menu-width)) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* Dark mode header styling */
+[data-bs-theme="dark"] #page-topbar {
+    background: #212529 !important;
+    border-bottom-color: #1C1F22 !important;
+}
+
+/* ===========================================
+   MODERN HAMBURGER BUTTON DESIGN
+   =========================================== */
+
+/* Simple modern hamburger button styling */
+.topnav-hamburger {
+    position: relative !important;
+    z-index: 1003 !important;
+    background: none !important;
+    border: none !important;
+    padding: 8px !important;
+    cursor: pointer !important;
+    border-radius: 6px !important;
+    transition: all 0.2s ease !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 36px !important;
+    height: 36px !important;
+    margin-right: 15px !important;
+}
+
+.topnav-hamburger:hover {
+    background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+.topnav-hamburger:active {
+    transform: scale(0.95) !important;
+}
+
+/* Dark mode hover effect */
+[data-bs-theme="dark"] .topnav-hamburger:hover {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.topnav-hamburger .hamburger-icon {
+    font-size: 18px !important;
+    color: #6c757d !important;
+    transition: all 0.2s ease !important;
+}
+
+/* Dark mode hamburger icon */
+[data-bs-theme="dark"] .topnav-hamburger .hamburger-icon {
+    color: #adb5bd !important;
+}
+
+/* Simple hover effect */
+.topnav-hamburger:hover .hamburger-icon {
+    color: #495057 !important;
+}
+
+[data-bs-theme="dark"] .topnav-hamburger:hover .hamburger-icon {
+    color: #ffffff !important;
+}
+
+/* Remove focus outline */
+.topnav-hamburger:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Simple active state */
+.topnav-hamburger:active {
+    transform: scale(0.95) !important;
+}
+
+/* Smooth sidebar content transitions */
+.app-menu.navbar-menu .navbar-nav {
+    transition: all 0.3s ease !important;
+}
+
+.app-menu.navbar-menu .navbar-nav .nav-item {
+    transition: all 0.3s ease !important;
+}
+
+/* Enhanced sidebar shadow on hover */
+.app-menu.navbar-menu:hover {
+    box-shadow: 2px 0 20px rgba(0, 0, 0, 0.2) !important;
+}
+
+.app-menu.navbar-menu.sidebar-hidden:hover {
+    box-shadow: 2px 0 25px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* ===========================================
+   COLLAPSED SIDEBAR HOVER TOOLTIPS
+   =========================================== */
+
+/* Tooltip container for collapsed sidebar */
+.app-menu.navbar-menu.sidebar-hidden .navbar-nav .nav-item {
+    position: relative !important;
+}
+
+/* Tooltips and nested menus are now handled by JavaScript */
+
+/* ===========================================
+   JAVASCRIPT-CONTROLLED TOOLTIPS AND MENUS
+   =========================================== */
+
+/* Styles for dynamically created tooltips */
+.sidebar-tooltip {
+    position: fixed !important;
+    background: #495057 !important;
+    color: white !important;
+    padding: 6px 10px !important;
+    border-radius: 4px !important;
+    font-size: 11px !important;
+    white-space: nowrap !important;
+    z-index: 10000 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+    pointer-events: none !important;
+}
+
+/* Dark mode tooltip */
+[data-bs-theme="dark"] .sidebar-tooltip {
+    background: #343a40 !important;
+    color: #ffffff !important;
+}
+
+/* Styles for dynamically created nested menus */
+.sidebar-nested-menu {
+    position: fixed !important;
+    background: #ffffff !important;
+    border: 1px solid #dee2e6 !important;
+    border-radius: 6px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+    z-index: 10000 !important;
+    max-height: 400px !important;
+    overflow-y: auto !important;
+}
+
+/* Dark mode nested menu */
+[data-bs-theme="dark"] .sidebar-nested-menu {
+    background: #2d3748 !important;
+    border-color: #4a5568 !important;
+    color: #ffffff !important;
+}
+
+/* Nested menu links */
+.sidebar-nested-menu .nav-link,
+.sidebar-nested-menu a,
+.sidebar-nested-menu button {
+    display: block !important;
+    padding: 8px 16px !important;
+    color: #495057 !important;
+    text-decoration: none !important;
+    border: none !important;
+    background: none !important;
+    width: 100% !important;
+    text-align: left !important;
+    font-size: 13px !important;
+    transition: background-color 0.2s ease !important;
+}
+
+.sidebar-nested-menu .nav-link:hover,
+.sidebar-nested-menu a:hover,
+.sidebar-nested-menu button:hover {
+    background-color: #f8f9fa !important;
+    color: #495057 !important;
+}
+
+/* Dark mode nested menu links */
+[data-bs-theme="dark"] .sidebar-nested-menu .nav-link,
+[data-bs-theme="dark"] .sidebar-nested-menu a,
+[data-bs-theme="dark"] .sidebar-nested-menu button {
+    color: #e2e8f0 !important;
+}
+
+[data-bs-theme="dark"] .sidebar-nested-menu .nav-link:hover,
+[data-bs-theme="dark"] .sidebar-nested-menu a:hover,
+[data-bs-theme="dark"] .sidebar-nested-menu button:hover {
+    background-color: #4a5568 !important;
+    color: #ffffff !important;
+}
+
+/* ===========================================
+   NAVIGATION LINKS FIXES
+   =========================================== */
+
+/* Navigation container fixes */
+.navbar-menu .navbar-nav {
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+}
+
+.navbar-menu .navbar-nav .nav-item {
+    width: 100% !important;
+    margin: 0 !important;
+}
+
+/* Navigation link styling */
+.navbar-menu .navbar-nav .nav-link {
+    display: flex !important;
+    align-items: center !important;
+    padding: 12px 20px !important;
+    color: var(--vz-vertical-menu-item-color) !important;
+    text-decoration: none !important;
+    transition: all 0.3s ease !important;
+    border-radius: 0 !important;
+    width: 100% !important;
+    border: none !important;
+    background: none !important;
+}
+
+.navbar-menu .navbar-nav .nav-link:hover {
+    color: var(--vz-vertical-menu-item-hover-color) !important;
+    background-color: var(--vz-vertical-menu-item-bg) !important;
+}
+
+.navbar-menu .navbar-nav .nav-link.active {
+    color: var(--vz-vertical-menu-item-active-color) !important;
+    background-color: var(--vz-vertical-menu-item-active-bg) !important;
+    font-weight: 500 !important;
+}
+
+/* Navigation icons */
+.navbar-menu .navbar-nav .nav-link i {
+    min-width: 20px !important;
+    font-size: 18px !important;
+    margin-right: 12px !important;
+    text-align: center !important;
+}
+
+.navbar-menu .navbar-nav .nav-link span {
+    flex: 1 !important;
+    white-space: nowrap !important;
+}
+
+/* Submenu styling */
+.navbar-menu .navbar-nav .nav-sm {
+    padding-left: 20px !important;
+    margin: 0 !important;
+}
+
+.navbar-menu .navbar-nav .nav-sm .nav-link {
+    padding: 8px 20px !important;
+    font-size: 14px !important;
+    color: var(--vz-vertical-menu-sub-item-color) !important;
+}
+
+.navbar-menu .navbar-nav .nav-sm .nav-link:hover {
+    color: var(--vz-vertical-menu-sub-item-hover-color) !important;
+}
+
+.navbar-menu .navbar-nav .nav-sm .nav-link.active {
+    color: var(--vz-vertical-menu-item-active-color) !important;
+}
+
+/* Menu title styling */
+/* .navbar-menu .menu-title {
+    padding: 15px 20px 5px !important;
+    margin: 0 !important;
+} */
+
+.navbar-menu .menu-title span {
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    color: var(--vz-vertical-menu-title-color) !important;
+}
+
+/* ===========================================
+   OVERLAY FIXES
+   =========================================== */
+
+.vertical-overlay {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    z-index: 1000 !important;
+    display: none !important;
+}
+
+.vertical-overlay.show {
+    display: block !important;
+}
+
+/* ===========================================
+   RESPONSIVE FIXES
+   =========================================== */
+
+/* Mobile styles */
+@media (max-width: 767.98px) {
+    /* Base mobile sidebar styles */
+    .app-menu.navbar-menu {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 280px !important;
+        height: 100vh !important;
+        z-index: 1002 !important;
+        box-shadow: 2px 0 15px rgba(0, 0, 0, 0.2) !important;
+        transition: transform 0.3s ease !important;
+        background: var(--vz-vertical-menu-bg) !important;
+        overflow-y: auto !important;
+        /* Default hidden state on mobile */
+        transform: translateX(-100%) !important;
+    }
+    
+    /* Mobile sidebar when visible (not collapsed) - SHOW */
+    .app-menu.navbar-menu:not(.sidebar-hidden) {
+        transform: translateX(0) !important;
+        transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+    
+    /* Mobile sidebar when hidden (collapsed) - HIDE */
+    .app-menu.navbar-menu.sidebar-hidden {
+        transform: translateX(-100%) !important;
+        transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+    
+    /* Make overlay fade smoothly */
+    .vertical-overlay {
+        transition: opacity 0.25s ease-in-out !important;
+        opacity: 0 !important;
+    }
+
+    .vertical-overlay.show {
+        opacity: 1 !important;
+    }
+
+    body.vertical-sidebar-enable .app-menu.navbar-menu {
+        transform: translateX(0) !important;
+    }
+
+    /* Ensure the logo area is visible on mobile when sidebar is open */
+    .app-menu.navbar-menu:not(.sidebar-hidden) .navbar-brand-box {
+        display: flex !important;
+        justify-content: flex-start !important;
+        align-items: center !important;
+        padding: 1rem 1rem 0.6rem !important;
+    }
+
+    .app-menu.navbar-menu:not(.sidebar-hidden) .navbar-brand-box .logo-lg,
+    .app-menu.navbar-menu:not(.sidebar-hidden) .navbar-brand-box a.logo span.logo-lg {
+        display: block !important;
+    }
+
+    .app-menu.navbar-menu:not(.sidebar-hidden) .navbar-brand-box .logo-sm,
+    .app-menu.navbar-menu:not(.sidebar-hidden) .navbar-brand-box a.logo span.logo-sm {
+        display: none !important;
+    }
+    
+    /* Force show all text and icons on mobile */
+    .app-menu.navbar-menu .navbar-nav .nav-link span,
+    .app-menu.navbar-menu .menu-title,
+    .app-menu.navbar-menu .navbar-nav .nav-link[data-bs-toggle="collapse"]:after {
+        opacity: 1 !important;
+        display: inline !important;
+        visibility: visible !important;
+    }
+    
+    .main-content {
+        margin-left: 0 !important;
+        width: 100% !important;
+    }
+    
+    .main-content.sidebar-collapsed {
+        margin-left: 0 !important;
+    }
+}
+
+/* Desktop styles */
+@media (min-width: 768px) {
+    .app-menu.navbar-menu {
+        width: var(--vz-vertical-menu-width) !important;
+    }
+    
+    .main-content {
+        margin-left: var(--vz-vertical-menu-width) !important;
+    }
+}
+
+/* ===========================================
+   THEME FIXES
+   =========================================== */
+
+/* Light theme */
+[data-sidebar="light"] .app-menu.navbar-menu {
+    background-color: #ffffff !important;
+    border-right-color: #e9ecef !important;
+}
+
+/* Dark theme - clean styling */
+[data-sidebar="dark"] .app-menu.navbar-menu {
+    background-color: #1a1a1a !important;
+    border-right-color: #333333 !important;
+}
+
+/* Remove any gradient or overlay effects */
+.app-menu.navbar-menu,
+.app-menu.navbar-menu *,
+.app-menu.navbar-menu::before,
+.app-menu.navbar-menu::after {
+    background-image: none !important;
+    box-shadow: none !important;
+}
+
+/* Clean dark theme styling */
+[data-sidebar="dark"] .app-menu.navbar-menu {
+    background: #212529 !important;
+    box-shadow: none !important;
+}
+
+[data-sidebar="dark"] .app-menu.navbar-menu .navbar-brand-box {
+    background: #212529 !important;
+    border-bottom-color: #333333 !important;
+}
+
+[data-sidebar="dark"] .app-menu.navbar-menu .navbar-nav .nav-link {
+    color: #ffffff !important;
+}
+
+[data-sidebar="dark"] .app-menu.navbar-menu .navbar-nav .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: #ffffff !important;
+}
+
+[data-sidebar="dark"] .app-menu.navbar-menu .navbar-nav .nav-link.active {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    color: #ffffff !important;
+}
+
+[data-sidebar="dark"] .app-menu.navbar-menu .navbar-nav .nav-link i {
+    color: #ffffff !important;
+}
+
+[data-sidebar="dark"] .app-menu.navbar-menu .menu-title span {
+    color: #cccccc !important;
+}
+
+/* ===========================================
+   SCROLLBAR FIXES
+   =========================================== */
+
+.navbar-menu .simplebar-scrollbar:before {
+    background: rgba(0, 0, 0, 0.1) !important;
+    border-radius: 4px !important;
+}
+
+.navbar-menu .simplebar-scrollbar {
+    width: 6px !important;
+}
+
+/* ===========================================
+   DROPDOWN MENU FIXES
+   =========================================== */
+
+.navbar-menu .menu-dropdown {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+}
+
+.navbar-menu .menu-dropdown .nav {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.navbar-menu .menu-dropdown .nav-item {
+    width: 100% !important;
+    margin: 0 !important;
+}
+
+.navbar-menu .menu-dropdown .nav-link {
+    padding: 10px 20px 10px 40px !important;
+    font-size: 14px !important;
+    color: var(--vz-vertical-menu-sub-item-color) !important;
+    position: relative !important;
+}
+
+.navbar-menu .menu-dropdown .nav-link:before {
+    content: '' !important;
+    position: absolute !important;
+    left: 25px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 4px !important;
+    height: 4px !important;
+    background: var(--vz-vertical-menu-sub-item-color) !important;
+    border-radius: 50% !important;
+}
+
+.navbar-menu .menu-dropdown .nav-link:hover {
+    color: var(--vz-vertical-menu-sub-item-hover-color) !important;
+    background-color: var(--vz-vertical-menu-item-bg) !important;
+}
+
+.navbar-menu .menu-dropdown .nav-link:hover:before {
+    background: var(--vz-vertical-menu-sub-item-hover-color) !important;
+}
+
+.navbar-menu .menu-dropdown .nav-link.active {
+    color: var(--vz-vertical-menu-item-active-color) !important;
+    background-color: var(--vz-vertical-menu-item-active-bg) !important;
+}
+
+.navbar-menu .menu-dropdown .nav-link.active:before {
+    background: var(--vz-vertical-menu-item-active-color) !important;
+}
+
+/* Collapse button styling */
+.navbar-menu .nav-link[data-bs-toggle="collapse"] {
+    position: relative !important;
+}
+
+.navbar-menu .nav-link[data-bs-toggle="collapse"]:after {
+    position: absolute !important;
+    right: 20px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    font-family: "Material Design Icons" !important;
+    content: "\f0142" !important;
+    font-size: 1.05rem !important;
+    transition: transform 0.3s ease !important;
+}
+
+.navbar-menu .nav-link[data-bs-toggle="collapse"][aria-expanded="true"]:after {
+    transform: translateY(-50%) rotate(90deg) !important;
+}
+
+/* ===========================================
+   LOGO FIXES
+   =========================================== */
+/* 
+.navbar-menu .navbar-brand-box {
+    padding: 15px 20px !important;
+    border-bottom: 1px solid var(--vz-vertical-menu-border) !important;
+    background: var(--vz-vertical-menu-bg) !important;
+} */
+
+.navbar-menu .navbar-brand-box .logo {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: relative !important;
+}
+
+.navbar-menu .navbar-brand-box .logo img {
+    max-height: 35px !important;
+    width: auto !important;
+}
+
+/* Logo visibility - hide all logos by default */
+.navbar-menu .navbar-brand-box .logo-light,
+.navbar-menu .navbar-brand-box .logo-dark {
+    display: none !important;
+}
+
+/* Show appropriate logo based on theme */
+[data-sidebar="light"] .navbar-menu .navbar-brand-box .logo-dark {
+    display: block !important;
+}
+
+[data-sidebar="dark"] .navbar-menu .navbar-brand-box .logo-light {
+    display: block !important;
+}
+
+/* Hide all logo sizes by default */
+.navbar-menu .navbar-brand-box .logo .logo-sm,
+.navbar-menu .navbar-brand-box .logo .logo-lg {
+    display: none !important;
+}
+
+/* Show large logo when sidebar is expanded */
+[data-sidebar="light"] .navbar-menu .navbar-brand-box .logo-dark .logo-lg,
+[data-sidebar="dark"] .navbar-menu .navbar-brand-box .logo-light .logo-lg {
+    display: block !important;
+}
+
+/* When sidebar is collapsed, show small logo */
+.app-menu.navbar-menu.sidebar-hidden [data-sidebar="light"] .navbar-menu .navbar-brand-box .logo-dark .logo-lg {
+    display: none !important;
+}
+
+.app-menu.navbar-menu.sidebar-hidden [data-sidebar="light"] .navbar-menu .navbar-brand-box .logo-dark .logo-sm {
+    display: block !important;
+}
+
+.app-menu.navbar-menu.sidebar-hidden [data-sidebar="dark"] .navbar-menu .navbar-brand-box .logo-light .logo-lg {
+    display: none !important;
+}
+
+.app-menu.navbar-menu.sidebar-hidden [data-sidebar="dark"] .navbar-menu .navbar-brand-box .logo-light .logo-sm {
+    display: block !important;
+}
+
+/* Ensure proper logo sizing when collapsed */
+.app-menu.navbar-menu.sidebar-hidden .navbar-brand-box .logo img {
+    max-height: 45px !important;
+}
+
+/* ===========================================
+   SCROLLBAR CONTAINER FIXES
+   =========================================== */
+
+.navbar-menu #scrollbar {
+    height: calc(100vh - 70px) !important;
+    overflow-y: auto !important;
+}
+
+.navbar-menu #scrollbar .container-fluid {
+    padding: 0 !important;
+}
+
+/* ===========================================
+   ADDITIONAL SPACING FIXES
+   =========================================== */
+
+.navbar-menu .navbar-nav > .nav-item:first-child {
+    margin-top: 10px !important;
+}
+
+.navbar-menu .navbar-nav > .nav-item:last-child {
+    margin-bottom: 10px !important;
+}
+
+/* ===========================================
+   SIDEBAR STATE PERSISTENCE FIXES
+   =========================================== */
+
+/* Ensure sidebar state is maintained across page loads */
+body.sidebar-collapsed .app-menu.navbar-menu {
+    width: var(--sidebar-collapsed-width) !important;
+}
+
+body.sidebar-collapsed .main-content {
+    margin-left: var(--sidebar-collapsed-width) !important;
+    width: calc(100% - var(--sidebar-collapsed-width)) !important;
+}
+
+body.sidebar-collapsed #page-topbar {
+    left: var(--sidebar-collapsed-width) !important;
+    width: calc(100% - var(--sidebar-collapsed-width)) !important;
+}
+
+/* ===========================================
+   Z-INDEX AND LAYERING FIXES
+   =========================================== */
+
+/* Ensure proper z-index stacking */
+.app-menu.navbar-menu {
+    z-index: 1002 !important;
+}
+
+#page-topbar {
+    z-index: 1001 !important;
+}
+
+.vertical-overlay {
+    z-index: 1000 !important;
+}
+
+/* ===========================================
+   SMOOTH TRANSITIONS ENHANCEMENT
+   =========================================== */
+
+/* Enhanced transitions for all sidebar-related elements */
+.app-menu.navbar-menu,
+.main-content,
+#page-topbar {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Smooth width transitions for sidebar */
+.app-menu.navbar-menu {
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Smooth positioning transitions for header and main content */
+.main-content,
+#page-topbar {
+    transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                left 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* ===========================================
+   ENHANCED SIDEBAR INTERACTIONS
+   =========================================== */
+
+/* Simple hover effects for collapsed sidebar */
+.app-menu.navbar-menu.sidebar-hidden .navbar-nav .nav-item .nav-link {
+    transition: all 0.2s ease !important;
+    position: relative !important;
+}
+
+.app-menu.navbar-menu.sidebar-hidden .navbar-nav .nav-item .nav-link:hover {
+    background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Enhanced tooltip positioning */
+.app-menu.navbar-menu.sidebar-hidden .navbar-nav .nav-item .nav-link[data-tooltip] {
+    position: relative !important;
+}
+
+/* Nested menus are now handled by JavaScript */
+
+/* Simple icon animations */
+.app-menu.navbar-menu.sidebar-hidden .navbar-nav .nav-item .nav-link i {
+    transition: all 0.2s ease !important;
+}
+
+/* Dark mode hover effects */
+[data-bs-theme="dark"] .app-menu.navbar-menu.sidebar-hidden .navbar-nav .nav-item .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* ===========================================
+   DARK THEME CARD HEADER FIXES
+   =========================================== */
+
+/* Fix for card-header with bg-white in dark mode */
+[data-bs-theme="dark"] .card-header.bg-white,
+[data-bs-theme="dark"] .card-header.bg-white.border-0,
+[data-bs-theme="dark"] .bg-white.card-header,
+[data-bs-theme="dark"] .bg-white.card-header.border-0 {
+    background-color: var(--vz-secondary-bg, #2d3748) !important;
+    color: var(--vz-body-color, #ffffff) !important;
+    border-color: var(--vz-border-color, #4a5568) !important;
+}
+
+/* Fix for any element with bg-white in dark mode */
+[data-bs-theme="dark"] .bg-white {
+    background-color: var(--vz-secondary-bg, #2d3748) !important;
+    color: var(--vz-body-color, #ffffff) !important;
+}
+
+/* Fix for card headers specifically in dark mode */
+[data-bs-theme="dark"] .card-header {
+    background-color: var(--vz-card-bg, var(--vz-secondary-bg, #2d3748)) !important;
+    border-color: var(--vz-border-color, #4a5568) !important;
+    color: var(--vz-body-color, #ffffff) !important;
+}
+
+/* Fix for cards in dark mode */
+[data-bs-theme="dark"] .card {
+    background-color: var(--vz-card-bg, var(--vz-secondary-bg, #2d3748)) !important;
+    border-color: var(--vz-border-color, #4a5568) !important;
+    color: var(--vz-body-color, #ffffff) !important;
+}
+
+/* Fix for border-0 class to maintain proper borders in dark mode */
+[data-bs-theme="dark"] .card-header.border-0 {
+    border-bottom: 1px solid var(--vz-border-color, #4a5568) !important;
+}
+
+/* Fix for any hardcoded white backgrounds in dark mode */
+[data-bs-theme="dark"] .bg-light,
+[data-bs-theme="dark"] .bg-light.bg-opacity-10,
+[data-bs-theme="dark"] .bg-light.bg-opacity-25,
+[data-bs-theme="dark"] .bg-light.bg-opacity-50,
+[data-bs-theme="dark"] .bg-light.bg-opacity-75,
+[data-bs-theme="dark"] .bg-light.bg-opacity-100 {
+    background-color: var(--vz-secondary-bg, #2d3748) !important;
+}
+
+/* Fix for dropdown menus in dark mode */
+[data-bs-theme="dark"] .dropdown-menu {
+    background-color: var(--vz-dropdown-bg, #2d3748) !important;
+    border-color: var(--vz-border-color, #4a5568) !important;
+    color: var(--vz-body-color, #ffffff) !important;
+}
+
+/* Fix for modal content in dark mode */
+[data-bs-theme="dark"] .modal-content {
+    background-color: var(--vz-modal-content-bg, var(--vz-secondary-bg, #2d3748)) !important;
+    border-color: var(--vz-border-color, #4a5568) !important;
+    color: var(--vz-body-color, #ffffff) !important;
+}
+
+/* Fix for form controls in dark mode */
+[data-bs-theme="dark"] .form-control,
+[data-bs-theme="dark"] .form-select {
+    background-color: var(--vz-input-bg, #2d3748) !important;
+    border-color: var(--vz-border-color, #4a5568) !important;
+    color: var(--vz-body-color, #ffffff) !important;
+}
+
+/* Fix for input group text in dark mode */
+[data-bs-theme="dark"] .input-group-text {
+    background-color: var(--vz-input-group-addon-bg, #2d3748) !important;
+    border-color: var(--vz-border-color, #4a5568) !important;
+    color: var(--vz-body-color, #ffffff) !important;
+}
+
+/* Fix for table headers in dark mode */
+[data-bs-theme="dark"] .table-light,
+[data-bs-theme="dark"] .table thead th {
+    background-color: var(--vz-table-head-bg, #374151) !important;
+    color: var(--vz-table-head-color, #ffffff) !important;
+    border-color: var(--vz-border-color, #4a5568) !important;
+}
+
+/* Fix for buttons with light backgrounds in dark mode */
+[data-bs-theme="dark"] .btn-light {
+    background-color: var(--vz-secondary-bg, #374151) !important;
+    border-color: var(--vz-border-color, #4a5568) !important;
+    color: var(--vz-body-color, #ffffff) !important;
+}
+
+/* Fix for badges and other elements with hardcoded backgrounds */
+[data-bs-theme="dark"] .badge-light,
+[data-bs-theme="dark"] .badge.bg-light {
+    background-color: var(--vz-secondary-bg, #374151) !important;
+    color: var(--vz-body-color, #ffffff) !important;
+}
+
+/* Fix for alert components in dark mode */
+[data-bs-theme="dark"] .alert-light {
+    background-color: var(--vz-secondary-bg, #374151) !important;
+    border-color: var(--vz-border-color, #4a5568) !important;
+    color: var(--vz-body-color, #ffffff) !important;
+}
+
+/* Fix for list groups in dark mode */
+[data-bs-theme="dark"] .list-group-item {
+    background-color: var(--vz-secondary-bg, #2d3748) !important;
+    border-color: var(--vz-border-color, #4a5568) !important;
+    color: var(--vz-body-color, #ffffff) !important;
+}
+
+/* Fix for pagination in dark mode */
+[data-bs-theme="dark"] .pagination .page-link {
+    background-color: var(--vz-secondary-bg, #2d3748) !important;
+    border-color: var(--vz-border-color, #4a5568) !important;
+    color: var(--vz-body-color, #ffffff) !important;
+}
+
+/* Fix for nav tabs in dark mode */
+[data-bs-theme="dark"] .nav-tabs .nav-link {
+    background-color: transparent !important;
+    border-color: var(--vz-border-color, #4a5568) !important;
+    color: var(--vz-body-color, #ffffff) !important;
+}
+
+[data-bs-theme="dark"] .nav-tabs .nav-link.active {
+    background-color: var(--vz-secondary-bg, #2d3748) !important;
+    border-color: var(--vz-border-color, #4a5568) !important;
+    color: var(--vz-body-color, #ffffff) !important;
+}
+
+/* Fix for accordion components in dark mode */
+[data-bs-theme="dark"] .accordion-item {
+    background-color: var(--vz-secondary-bg, #2d3748) !important;
+    border-color: var(--vz-border-color, #4a5568) !important;
+}
+
+[data-bs-theme="dark"] .accordion-button {
+    background-color: var(--vz-secondary-bg, #2d3748) !important;
+    color: var(--vz-body-color, #ffffff) !important;
+}
+
+[data-bs-theme="dark"] .accordion-button:not(.collapsed) {
+    background-color: var(--vz-primary, #687cfe) !important;
+    color: #ffffff !important;
+}
+
+/* Fix for progress bars in dark mode */
+[data-bs-theme="dark"] .progress {
+    background-color: var(--vz-secondary-bg, #374151) !important;
+}
+
+/* Fix for tooltips in dark mode */
+[data-bs-theme="dark"] .tooltip .tooltip-inner {
+    background-color: var(--vz-dark, #1f2937) !important;
+    color: var(--vz-body-color, #ffffff) !important;
+}
+
+/* Fix for popovers in dark mode */
+[data-bs-theme="dark"] .popover {
+    background-color: var(--vz-secondary-bg, #2d3748) !important;
+    border-color: var(--vz-border-color, #4a5568) !important;
+    color: var(--vz-body-color, #ffffff) !important;
+}
+
+/* Fix for offcanvas in dark mode */
+[data-bs-theme="dark"] .offcanvas {
+    background-color: var(--vz-secondary-bg, #2d3748) !important;
+    color: var(--vz-body-color, #ffffff) !important;
+}
+
+/* Fix for toast notifications in dark mode */
+[data-bs-theme="dark"] .toast {
+    background-color: var(--vz-secondary-bg, #2d3748) !important;
+    border-color: var(--vz-border-color, #4a5568) !important;
+    color: var(--vz-body-color, #ffffff) !important;
+}
+
+/* Fix for breadcrumb in dark mode */
+[data-bs-theme="dark"] .breadcrumb {
+    background-color: transparent !important;
+}
+
+[data-bs-theme="dark"] .breadcrumb-item + .breadcrumb-item::before {
+    color: var(--vz-secondary-color, #9ca3af) !important;
+}
+
+/* Fix for pagination in dark mode */
+[data-bs-theme="dark"] .page-link {
+    background-color: var(--vz-secondary-bg, #2d3748) !important;
+    border-color: var(--vz-border-color, #4a5568) !important;
+    color: var(--vz-body-color, #ffffff) !important;
+}
+
+[data-bs-theme="dark"] .page-link:hover {
+    background-color: var(--vz-primary, #687cfe) !important;
+    border-color: var(--vz-primary, #687cfe) !important;
+    color: #ffffff !important;
+}
+
+/* Fix for close buttons in dark mode */
+[data-bs-theme="dark"] .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%) !important;
+}
+
+/* Ensure text colors are properly set in dark mode */
+[data-bs-theme="dark"] .text-dark,
+[data-bs-theme="dark"] .text-body {
+    color: var(--vz-body-color, #ffffff) !important;
+}
+
+[data-bs-theme="dark"] .text-muted {
+    color: var(--vz-secondary-color, #9ca3af) !important;
+}
+
+/* ===========================================
+   ADDITIONAL DARK THEME FIXES
+   =========================================== */
+
+/* Fix for any remaining hardcoded white backgrounds */
+[data-bs-theme="dark"] .bg-body,
+[data-bs-theme="dark"] .bg-body-secondary,
+[data-bs-theme="dark"] .bg-body-tertiary {
+    background-color: var(--vz-body-bg, #1f2937) !important;
+}
+
+/* Fix for card body in dark mode */
+[data-bs-theme="dark"] .card-body {
+    background-color: var(--vz-card-bg, var(--vz-secondary-bg, #2d3748)) !important;
+    color: var(--vz-body-color, #ffffff) !important;
+}
+
+/* Fix for card footer in dark mode */
+[data-bs-theme="dark"] .card-footer {
+    background-color: var(--vz-card-bg, var(--vz-secondary-bg, #2d3748)) !important;
+    border-color: var(--vz-border-color, #4a5568) !important;
+    color: var(--vz-body-color, #ffffff) !important;
+}
+
+/* Fix for navbar in dark mode */
+[data-bs-theme="dark"] .navbar {
+    background-color: var(--vz-secondary-bg, #2d3748) !important;
+    border-color: var(--vz-border-color, #4a5568) !important;
+}
+
+/* Fix for navbar brand and links in dark mode */
+[data-bs-theme="dark"] .navbar-brand,
+[data-bs-theme="dark"] .navbar-nav .nav-link {
+    color: var(--vz-body-color, #ffffff) !important;
+}
+
+/* Fix for jumbotron/hero sections in dark mode */
+[data-bs-theme="dark"] .jumbotron,
+[data-bs-theme="dark"] .hero {
+    background-color: var(--vz-secondary-bg, #2d3748) !important;
+    color: var(--vz-body-color, #ffffff) !important;
+}
+
+/* Fix for well components in dark mode */
+[data-bs-theme="dark"] .well,
+[data-bs-theme="dark"] .panel {
+    background-color: var(--vz-secondary-bg, #2d3748) !important;
+    border-color: var(--vz-border-color, #4a5568) !important;
+    color: var(--vz-body-color, #ffffff) !important;
+}
+
+/* Fix for thumbnail components in dark mode */
+[data-bs-theme="dark"] .thumbnail {
+    background-color: var(--vz-secondary-bg, #2d3748) !important;
+    border-color: var(--vz-border-color, #4a5568) !important;
+}
+
+/* Fix for media objects in dark mode */
+[data-bs-theme="dark"] .media {
+    background-color: var(--vz-secondary-bg, #2d3748) !important;
+    color: var(--vz-body-color, #ffffff) !important;
+}
+
+/* Fix for carousel components in dark mode */
+[data-bs-theme="dark"] .carousel-caption {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    color: var(--vz-body-color, #ffffff) !important;
+}
+
+/* Fix for blockquote in dark mode */
+[data-bs-theme="dark"] .blockquote {
+    background-color: var(--vz-secondary-bg, #2d3748) !important;
+    border-color: var(--vz-border-color, #4a5568) !important;
+    color: var(--vz-body-color, #ffffff) !important;
+}
+
+/* Fix for code blocks in dark mode */
+[data-bs-theme="dark"] .code,
+[data-bs-theme="dark"] pre,
+[data-bs-theme="dark"] .highlight {
+    background-color: var(--vz-secondary-bg, #2d3748) !important;
+    color: var(--vz-body-color, #ffffff) !important;
+    border-color: var(--vz-border-color, #4a5568) !important;
+}
+
+/* Fix for kbd elements in dark mode */
+[data-bs-theme="dark"] kbd {
+    background-color: var(--vz-dark, #1f2937) !important;
+    color: var(--vz-body-color, #ffffff) !important;
+}
+
+/* Fix for mark/highlight elements in dark mode */
+[data-bs-theme="dark"] mark {
+    background-color: var(--vz-warning, #fbbf24) !important;
+    color: var(--vz-dark, #1f2937) !important;
+}
+
+/* Fix for small text in dark mode */
+[data-bs-theme="dark"] small,
+[data-bs-theme="dark"] .small {
+    color: var(--vz-secondary-color, #9ca3af) !important;
+}
+
+/* Fix for lead text in dark mode */
+[data-bs-theme="dark"] .lead {
+    color: var(--vz-body-color, #ffffff) !important;
+}
+
+/* Fix for display headings in dark mode */
+[data-bs-theme="dark"] .display-1,
+[data-bs-theme="dark"] .display-2,
+[data-bs-theme="dark"] .display-3,
+[data-bs-theme="dark"] .display-4,
+[data-bs-theme="dark"] .display-5,
+[data-bs-theme="dark"] .display-6 {
+    color: var(--vz-heading-color, #ffffff) !important;
+}
+
+/* Fix for figure captions in dark mode */
+[data-bs-theme="dark"] .figure-caption {
+    color: var(--vz-secondary-color, #9ca3af) !important;
+}
+
+/* Fix for table captions in dark mode */
+[data-bs-theme="dark"] .table caption {
+    color: var(--vz-secondary-color, #9ca3af) !important;
+}
+
+/* Fix for fieldset legends in dark mode */
+[data-bs-theme="dark"] legend {
+    color: var(--vz-body-color, #ffffff) !important;
+}
+
+/* Fix for labels in dark mode */
+[data-bs-theme="dark"] label {
+    color: var(--vz-body-color, #ffffff) !important;
+}
+
+/* Fix for help text in dark mode */
+[data-bs-theme="dark"] .form-text,
+[data-bs-theme="dark"] .help-block {
+    color: var(--vz-secondary-color, #9ca3af) !important;
+}
+
+/* Fix for invalid feedback in dark mode */
+[data-bs-theme="dark"] .invalid-feedback,
+[data-bs-theme="dark"] .invalid-tooltip {
+    color: var(--vz-danger, #ef4444) !important;
+}
+
+/* Fix for valid feedback in dark mode */
+[data-bs-theme="dark"] .valid-feedback,
+[data-bs-theme="dark"] .valid-tooltip {
+    color: var(--vz-success, #10b981) !important;
+}

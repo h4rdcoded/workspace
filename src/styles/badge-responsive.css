@@ -1,0 +1,130 @@
+/* Badge Responsive Styles for Sidebar Functionality */
+
+/* Base badge styles */
+.badge {
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Badge alignment fixes */
+.badge.align-self-center {
+  align-self: center !important;
+}
+
+.badge.float-end {
+  float: right !important;
+}
+
+/* Sidebar responsive badge styles */
+.sidebar-collapsed .badge {
+  font-size: 0.65rem;
+  padding: 0.25em 0.4em;
+  min-width: auto;
+}
+
+.sidebar-expanded .badge {
+  font-size: 0.75rem;
+  padding: 0.375em 0.75em;
+}
+
+/* Navigation badge styles */
+.nav-link .badge {
+  margin-left: 0.5rem;
+  vertical-align: middle;
+}
+
+.nav-item .badge {
+  position: relative;
+  top: -1px;
+}
+
+/* Table badge alignment */
+.table .badge {
+  vertical-align: middle;
+}
+
+/* Card badge alignment */
+.card-header .badge {
+  margin-left: auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .badge {
+    font-size: 0.65rem;
+    padding: 0.25em 0.4em;
+  }
+  
+  .nav-link .badge {
+    margin-left: 0.25rem;
+  }
+}
+
+/* Sidebar state specific styles */
+body[data-sidebar-size="sm"] .badge,
+body[data-sidebar-size="sm-hover"] .badge {
+  font-size: 0.6rem;
+  padding: 0.2em 0.3em;
+  min-width: 1.2em;
+  text-align: center;
+}
+
+body[data-sidebar-size="lg"] .badge {
+  font-size: 0.75rem;
+  padding: 0.375em 0.75em;
+}
+
+/* Badge color variants with better contrast */
+.badge.bg-primary-subtle {
+  background-color: rgba(13, 110, 253, 0.1) !important;
+  color: #0d6efd !important;
+  border: 1px solid rgba(13, 110, 253, 0.2);
+}
+
+.badge.bg-success-subtle {
+  background-color: rgba(25, 135, 84, 0.1) !important;
+  color: #198754 !important;
+  border: 1px solid rgba(25, 135, 84, 0.2);
+}
+
+.badge.bg-warning-subtle {
+  background-color: rgba(255, 193, 7, 0.1) !important;
+  color: #ffc107 !important;
+  border: 1px solid rgba(255, 193, 7, 0.2);
+}
+
+.badge.bg-danger-subtle {
+  background-color: rgba(220, 53, 69, 0.1) !important;
+  color: #dc3545 !important;
+  border: 1px solid rgba(220, 53, 69, 0.2);
+}
+
+.badge.bg-info-subtle {
+  background-color: rgba(13, 202, 240, 0.1) !important;
+  color: #0dcaf0 !important;
+  border: 1px solid rgba(13, 202, 240, 0.2);
+}
+
+.badge.bg-secondary-subtle {
+  background-color: rgba(108, 117, 125, 0.1) !important;
+  color: #6c757d !important;
+  border: 1px solid rgba(108, 117, 125, 0.2);
+}
+
+/* Animation for sidebar toggle */
+.sidebar-transition .badge {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Fix for badge overflow in small containers */
+.badge-container {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+}
+
+.badge-container .badge {
+  flex-shrink: 0;
+}
