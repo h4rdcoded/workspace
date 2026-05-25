@@ -35,13 +35,25 @@ jobs:
 
       - name: Sync with S3 bucket
         run: |
-          # 1. Upload immutable assets (JS, CSS, Images) with long-term caching
-          # These are in the assets/ folder which was copied from public/assets/
-          aws s3 sync build/assets/ s3://${{ secrets.AWS_S3_BUCKET_NAME }}/assets/ --delete --cache-control "max-age=31536000, public, immutable"
+          # Increase concurrency for faster uploads
+          aws configure set default.s3.max_concurrent_requests 20
           
-          # 2. Upload the rest (index.html, manifest, robots.txt, and static/ folder) with NO CACHE
-          # This ensures the browser always checks for the latest version of the entry point.
-          aws s3 sync build/ s3://${{ secrets.AWS_S3_BUCKET_NAME }}/ --exclude "assets/*" --delete --cache-control "no-cache, no-store, must-revalidate"
+          # 1. Upload everything with long-term caching by default (for hashed assets)
+          # Using --quiet to reduce logging overhead
+          aws s3 sync build/ s3://${{ secrets.AWS_S3_BUCKET_NAME }}/ --delete --cache-control "max-age=31536000, public, immutable" --quiet
+          
+          # 2. Overwrite entry points and non-hashed files with NO CACHE
+          # This ensures the browser always checks for the latest version of the application.
+          # We specifically target index.html, manifest.json, and other root files.
+          aws s3 cp build/index.html s3://${{ secrets.AWS_S3_BUCKET_NAME }}/index.html --cache-control "no-cache, no-store, must-revalidate" --quiet
+          
+          # If you have other root files like manifest.json or robots.txt, you can add them here
+          if [ -f build/manifest.json ]; then
+            aws s3 cp build/manifest.json s3://${{ secrets.AWS_S3_BUCKET_NAME }}/manifest.json --cache-control "no-cache, no-store, must-revalidate" --quiet
+          fi
+          if [ -f build/robots.txt ]; then
+            aws s3 cp build/robots.txt s3://${{ secrets.AWS_S3_BUCKET_NAME }}/robots.txt --cache-control "no-cache, no-store, must-revalidate" --quiet
+          fi
 
       - name: Deployment summary
         run: echo "Deployment completed successfully."
