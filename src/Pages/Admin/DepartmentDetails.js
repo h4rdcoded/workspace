@@ -1032,34 +1032,37 @@ const DepartmentDetails = () => {
                         <div className="card-body p-0">
                             <ul className="nav nav-tabs nav-tabs-custom nav-justified" role="tablist">
                                 <li className="nav-item">
-                                    <a 
+                                    <button 
                                         className={`nav-link ${activeSection === 'teamLeaders' ? 'active' : ''}`}
                                         onClick={() => setActiveSection('teamLeaders')}
                                         role="tab"
+                                        style={{ background: 'none', border: 'none', width: '100%' }}
                                     >
                                         <i className="ri-user-star-line me-2"></i>
                                         Team Leaders
-                                    </a>
+                                    </button>
                                 </li>
                                 <li className="nav-item">
-                                    <a 
+                                    <button 
                                         className={`nav-link ${activeSection === 'employees' ? 'active' : ''}`}
                                         onClick={() => setActiveSection('employees')}
                                         role="tab"
+                                        style={{ background: 'none', border: 'none', width: '100%' }}
                                     >
                                         <i className="ri-user-line me-2"></i>
                                         Employees
-                                    </a>
+                                    </button>
                                 </li>
                                 <li className="nav-item">
-                                    <a 
+                                    <button 
                                         className={`nav-link ${activeSection === 'tasks' ? 'active' : ''}`}
                                         onClick={() => setActiveSection('tasks')}
                                         role="tab"
+                                        style={{ background: 'none', border: 'none', width: '100%' }}
                                     >
                                         <i className="ri-task-line me-2"></i>
                                         Tasks
-                                    </a>
+                                    </button>
                                 </li>
                             </ul>
                         </div>

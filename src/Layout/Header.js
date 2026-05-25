@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { ConfigContext } from "../Context/ConfigContext";
-import { buildApiUrl, getAuthHeaders, buildLeadCrmUrl, getLeadCrmAuthHeaders } from "../config/api";
+import { buildApiUrl, getAuthHeaders } from "../config/api";
 
 const Header = () => {
   const { leadCrmUser, isLeadCrmAuthenticated, staticFilesBaseURL } = useContext(ConfigContext) || {};
@@ -14,19 +14,16 @@ const Header = () => {
   const isTeamLeader = userRole === 'TL';
   const isExecutive = userRole === 'EMPL';
   const isQaTester = userRole === 'QA_TESTER';
-  const isEmployeeOrTester = isExecutive || isQaTester;
   
   // Removed debug logging for performance
 
   // State for department manager status
   const [isDepartmentManager, setIsDepartmentManager] = useState(false);
   const [departmentId, setDepartmentId] = useState(null);
-  const [checkingDepartmentManager, setCheckingDepartmentManager] = useState(true);
 
   // Chat notifications state
   const [chatNotifications, setChatNotifications] = useState([]);
   const [unreadChatCount, setUnreadChatCount] = useState(0);
-  const [chatSocket, setChatSocket] = useState(null);
   
   // Task notifications state
   const [taskNotifications, setTaskNotifications] = useState([]);
@@ -57,7 +54,6 @@ const Header = () => {
       if (!isLeadCrmAuthenticated || !leadCrmUser?.id || userRole !== 'TL') {
         setIsDepartmentManager(false);
         setDepartmentId(null);
-        setCheckingDepartmentManager(false);
         return;
       }
 
@@ -94,8 +90,6 @@ const Header = () => {
       } catch (error) {
         setIsDepartmentManager(false);
         setDepartmentId(null);
-      } finally {
-        setCheckingDepartmentManager(false);
       }
     };
 
@@ -104,53 +98,47 @@ const Header = () => {
 
   // Fetch user department and designation info when component mounts or user changes
   useEffect(() => {
-    if (isLeadCrmAuthenticated && leadCrmUser?.id) {
-      fetchUserInfo();
-    }
-  }, [leadCrmUser?.id, isLeadCrmAuthenticated]);
-
-  // Fetch user department and designation info
-  const fetchUserInfo = async () => {
-    if (!leadCrmUser?.id) return;
-    
-    try {
-      const response = await fetch(buildApiUrl(`/users/${leadCrmUser.id}`), {
-        credentials: 'include',
-        headers: getAuthHeaders()
-      });
+    // Fetch user department and designation info
+    const fetchUserInfo = async () => {
+      if (!leadCrmUser?.id) return;
       
-      if (response.ok) {
-        const data = await response.json();
-        if (data.success && data.data && data.data.user) {
-          const user = data.data.user;
-          setUserDepartment(user.department_name || 'Not Assigned');
-          setUserDesignation(user.designation_title || 'Not Assigned');
-          setUserJoiningDate(user.joining_date || user.created_at || null);
+      try {
+        const response = await fetch(buildApiUrl(`/users/${leadCrmUser.id}`), {
+          credentials: 'include',
+          headers: getAuthHeaders()
+        });
+        
+        if (response.ok) {
+          const data = await response.json();
+          if (data.success && data.data && data.data.user) {
+            const user = data.data.user;
+            setUserDepartment(user.department_name || 'Not Assigned');
+            setUserDesignation(user.designation_title || 'Not Assigned');
+            setUserJoiningDate(user.joining_date || user.created_at || null);
+          } else {
+            // Fallback to defaults
+            setUserDepartment('Not Assigned');
+            setUserDesignation('Not Assigned');
+            setUserJoiningDate(leadCrmUser?.created_at || null);
+          }
         } else {
-          // Fallback to defaults
+          // Set defaults if fetch fails
           setUserDepartment('Not Assigned');
           setUserDesignation('Not Assigned');
           setUserJoiningDate(leadCrmUser?.created_at || null);
         }
-      } else {
-        // Set defaults if fetch fails
+      } catch (error) {
+        // Silently handle errors - set defaults if fetch fails
         setUserDepartment('Not Assigned');
         setUserDesignation('Not Assigned');
         setUserJoiningDate(leadCrmUser?.created_at || null);
       }
-    } catch (error) {
-      // Silently handle errors - set defaults if fetch fails
-      setUserDepartment('Not Assigned');
-      setUserDesignation('Not Assigned');
-      setUserJoiningDate(leadCrmUser?.created_at || null);
-    }
-  };
+    };
 
-  // Handle welcome modal open
-  const handleWelcomeModalOpen = () => {
-    setShowWelcomeModal(true);
-    fetchUserInfo();
-  };
+    if (isLeadCrmAuthenticated && leadCrmUser?.id) {
+      fetchUserInfo();
+    }
+  }, [leadCrmUser?.id, isLeadCrmAuthenticated, leadCrmUser?.created_at]);
 
   // Helper function to convert hex to rgba
   const hexToRgba = (hex, alpha = 1) => {
@@ -191,7 +179,7 @@ const Header = () => {
     // Convert markdown-style bullet points to HTML lists
     // Handle both * and - as bullet points
     let formattedContent = escapedContent
-      .replace(/^\s*[*\-]\s+(.*)$/gm, '<li>$1</li>')
+      .replace(/^\s*[*-]\s+(.*)$/gm, '<li>$1</li>')
       .replace(/(<li>.*<\/li>)/g, '<ul>$1</ul>');
     
     // Handle multiple lists

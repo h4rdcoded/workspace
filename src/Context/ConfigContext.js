@@ -35,7 +35,7 @@ export const ConfigProvider = ({ children }) => {
     return !!(token && token !== 'authenticated' && token !== 'null' && user && user !== 'null');
   });
   
-  const [apiHeaderJSON, setHeaderJSON] = useState({
+  const [apiHeaderJSON] = useState({
     token: `${token}`,
     "Content-Type": "application/json",
     company_id: companyId,
@@ -43,7 +43,7 @@ export const ConfigProvider = ({ children }) => {
     admin_id: adminId
   });
   
-  const [apiHeaderFile, setHeaderFile] = useState({
+  const [apiHeaderFile] = useState({
     token: `${token}`, 
     "Content-Type": "multipart/form-data", 
     company_id: companyId, 

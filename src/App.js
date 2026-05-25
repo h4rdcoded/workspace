@@ -190,65 +190,6 @@ function PublicRoute() {
   return <Outlet />;
 }
 
-// Open Route Component (allows both authenticated and unauthenticated users)
-function OpenRoute() {
-  const context = useContext(ConfigContext);
-  
-  if (!context || !context.isInitialized) {
-    return (
-      <div style={{ 
-        padding: '20px', 
-        textAlign: 'center', 
-        minHeight: '100vh', 
-        backgroundColor: '#f8f9fa',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center'
-      }}>
-        <div style={{
-          position: 'relative',
-          marginBottom: '20px'
-        }}>
-          <img 
-            src="/assets/ip.png" 
-            alt="Loading" 
-            style={{
-              maxWidth: '200px',
-              animation: 'pulse 1.5s infinite ease-in-out'
-            }} 
-          />
-          <div style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            background: 'rgba(255, 255, 255, 0.2)',
-            borderRadius: '50%',
-            animation: 'overlay-pulse 1.5s infinite ease-in-out'
-          }}></div>
-        </div>
-        <h3 style={{ color: '#333', marginTop: '15px' }}>Loading your workspace...</h3>
-        <style jsx="true">{`
-          @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-          }
-          @keyframes overlay-pulse {
-            0% { opacity: 0.1; }
-            50% { opacity: 0.3; }
-            100% { opacity: 0.1; }
-          }
-        `}</style>
-      </div>
-    );
-  }
-  
-  return <Outlet />;
-}
-
 // Main App Router Component that uses Context
 function AppRouter() {
   const context = useContext(ConfigContext);
